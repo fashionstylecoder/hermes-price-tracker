@@ -35,29 +35,4 @@ else:
     title_color = selected_color
 
 # Line chart of pricing
-st.subheader("📈 Price Trend Over Time")
-fig, ax = plt.subplots()
-ax.plot(filtered_df["Year"], filtered_df["Retail Price"], label="Retail Price", linewidth=2)
-ax.plot(filtered_df["Year"], filtered_df["Resale - New"], label="Resale – New", linestyle='--')
-ax.plot(filtered_df["Year"], filtered_df["Resale - Pre-Owned"], label="Resale – Pre-Owned", linestyle=':')
-ax.set_ylabel("Price (USD)")
-ax.set_xlabel("Year")
-ax.set_title(f"{selected_style} in {title_color}")
-ax.legend()
-st.pyplot(fig)
-
-# Uplift Calculations
-st.subheader("💰 Resale Uplift Insights")
-
-# Add % uplift columns
-filtered_df["Uplift - New"] = ((filtered_df["Resale - New"] - filtered_df["Retail Price"]) / filtered_df["Retail Price"]) * 100
-filtered_df["Uplift - Pre-Owned"] = ((filtered_df["Resale - Pre-Owned"] - filtered_df["Retail Price"]) / filtered_df["Retail Price"]) * 100
-
-# Text summaries
-avg_new = filtered_df["Uplift - New"].mean()
-avg_pre = filtered_df["Uplift - Pre-Owned"].mean()
-st.markdown(f"**Average Resale Uplift (New):** {avg_new:.1f}%")
-st.markdown(f"**Average Resale Uplift (Pre-Owned):** {avg_pre:.1f}%")
-
-# Uplift chart
-fig2, ax
+st.sub
