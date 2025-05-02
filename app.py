@@ -47,7 +47,7 @@ ax.legend()
 st.pyplot(fig)
 
 # Premium Calculations
-st.subheader("💰 Resale Premium Insights")
+st.subheader(f"💰 Resale Premium Insights: Hermès {selected_style} in {title_color}")
 
 # Calculate % premium
 filtered_df["Premium - New"] = ((filtered_df["Resale - New"] - filtered_df["Retail Price"]) / filtered_df["Retail Price"]) * 100
