@@ -65,7 +65,7 @@ ax2.plot(filtered_df["Year"], filtered_df["Premium - New"], label="New Resale Pr
 ax2.plot(filtered_df["Year"], filtered_df["Premium - Pre-Owned"], label="Pre-Owned Resale Premium", linestyle=':', marker='o')
 ax2.set_ylabel("Premium (%)")
 ax2.set_xlabel("Year")
-ax2.set_title("Resale Premium Over Retail Price")
+ax2.set_title(f"Resale Premium for Hermès {selected_style} in {title_color}")
 ax2.legend()
 st.pyplot(fig2)
 
