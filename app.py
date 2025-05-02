@@ -15,7 +15,7 @@ selected_style = st.selectbox("Select Bag Style:", style_options)
 
 # Dynamically load color options based on selected style
 color_options = sorted(df[df["Style"] == selected_style]["Color"].unique())
-color_options.insert(0, "All Colors")  # Add 'All Colors' to top
+color_options.insert(0, "All Colors")
 selected_color = st.selectbox("Select Color:", color_options)
 
 # Apply filters
@@ -34,7 +34,8 @@ else:
     filtered_df = df[(df["Style"] == selected_style) & (df["Color"] == selected_color)]
     title_color = selected_color
 
-# Plotting
+# Line chart of pricing
+st.subheader("📈 Price Trend Over Time")
 fig, ax = plt.subplots()
 ax.plot(filtered_df["Year"], filtered_df["Retail Price"], label="Retail Price", linewidth=2)
 ax.plot(filtered_df["Year"], filtered_df["Resale - New"], label="Resale – New", linestyle='--')
@@ -45,11 +46,18 @@ ax.set_title(f"{selected_style} in {title_color}")
 ax.legend()
 st.pyplot(fig)
 
-# Download CSV button
-csv = filtered_df.to_csv(index=False)
-st.download_button(
-    label="📥 Download Data as CSV",
-    data=csv,
-    file_name=f"{selected_style}_{title_color}_price_data.csv",
-    mime="text/csv"
-)
+# Uplift Calculations
+st.subheader("💰 Resale Uplift Insights")
+
+# Add % uplift columns
+filtered_df["Uplift - New"] = ((filtered_df["Resale - New"] - filtered_df["Retail Price"]) / filtered_df["Retail Price"]) * 100
+filtered_df["Uplift - Pre-Owned"] = ((filtered_df["Resale - Pre-Owned"] - filtered_df["Retail Price"]) / filtered_df["Retail Price"]) * 100
+
+# Text summaries
+avg_new = filtered_df["Uplift - New"].mean()
+avg_pre = filtered_df["Uplift - Pre-Owned"].mean()
+st.markdown(f"**Average Resale Uplift (New):** {avg_new:.1f}%")
+st.markdown(f"**Average Resale Uplift (Pre-Owned):** {avg_pre:.1f}%")
+
+# Uplift chart
+fig2, ax
