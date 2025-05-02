@@ -28,7 +28,7 @@ if selected_color == "All Colors":
             "Resale - New": "mean",
             "Resale - Pre-Owned": "mean"
         })
-)
+    )
     title_color = "All Colors (avg)"
 else:
     filtered_df = df[(df["Style"] == selected_style) & (df["Color"] == selected_color)]
@@ -44,3 +44,12 @@ ax.set_xlabel("Year")
 ax.set_title(f"{selected_style} in {title_color}")
 ax.legend()
 st.pyplot(fig)
+
+# Download CSV button
+csv = filtered_df.to_csv(index=False)
+st.download_button(
+    label="📥 Download Data as CSV",
+    data=csv,
+    file_name=f"{selected_style}_{title_color}_price_data.csv",
+    mime="text/csv"
+)
